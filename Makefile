@@ -1,11 +1,18 @@
+CC=gcc
 CFLAGS=-std=c11 -g -static
+SRC_FILES=$(wildcard tcc_*.c)
+OBJ_FILES=$(SRC_FILES:.c=.o)
 
-tcc: main.c
+tcc: $(OBJ_FILES)
+	$(CC) -o tcc $(OBJ_FILES) $(LDFLAGS)
 
-# test: 9cc
-# 	./test.sh
+$(OBJ_FILES): tcc.h
+
+test: tcc
+	./test.sh
+
 
 clean:
-	rm -f 9cc *.o *~ tmp*
+	rm -f tcc *.o *~ tmp*
 
 .PHONY: test clean
